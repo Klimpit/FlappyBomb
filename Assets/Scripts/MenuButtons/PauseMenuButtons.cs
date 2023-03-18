@@ -21,7 +21,7 @@ public class PauseMenuButtons : MenuButtons
             Time.timeScale = 1f;
             pauseButton.gameObject.SetActive(true);
             pausePanel.gameObject.SetActive(false);
-            Debug.Log("Запускаюсь, педик!");
+            Debug.Log("Start");
         }
     }
     public void PausePressed()
@@ -31,7 +31,7 @@ public class PauseMenuButtons : MenuButtons
             Time.timeScale = 0f;
             pauseButton.gameObject.SetActive(false);
             pausePanel.gameObject.SetActive(true);
-            Debug.Log("Останавливаюсь, сука!");
+            Debug.Log("Stop");
         }
     }
 }

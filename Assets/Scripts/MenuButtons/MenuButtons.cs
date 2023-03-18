@@ -15,7 +15,7 @@ public abstract class MenuButtons : MonoBehaviour
     public void ExitPressed()
     {
         Application.Quit();
-        Debug.Log("Закрылся, бля!");
+        Debug.Log("exit");
     }
     public void MenuPressed()
     {

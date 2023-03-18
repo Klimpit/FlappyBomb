@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: -2766817308157896985}
   - component: {fileID: 4979987813790438574}
   m_Layer: 0
-  m_Name: TrashCans
+  m_Name: Tubes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

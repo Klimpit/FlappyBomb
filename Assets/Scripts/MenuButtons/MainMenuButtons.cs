@@ -6,10 +6,10 @@ public class MainMenuButtons : MenuButtons
 {
     public void SettingPressed()
     {
-        Debug.Log("ўа настроишь, ага бл€!");
+        Debug.Log("Settings");
     }
     public void StatsPressed()
     {
-        Debug.Log("ўас, ты мне посмотришь статисту, посмотришь...");
+        Debug.Log("Statistic");
     }
 }

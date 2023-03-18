@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrashCanSpawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     private float timer = 0;
-    private float maxTime;
-    public GameObject trashCan;
+    private float maxTime = 2f;
+    public GameObject tube;
     public float height;
     public float destroyTimer;
     public float additionalHeight = 0;
 
     void Start()
     {
-        SpawnTrashCan();
+        Spawn();
     }
 
     // Update is called once per frame
@@ -23,38 +23,19 @@ public class TrashCanSpawner : MonoBehaviour
         if (timer > maxTime)
         {
             timer = 0;
-            SpawnTrashCan();
+            Spawn();
         }
         timer += Time.deltaTime;
     }
 
-    private void SpawnTrashCan()
+    private void Spawn()
     {
-        GameObject newTrashCan = Instantiate(trashCan);
+        GameObject newTrashCan = Instantiate(tube);
         newTrashCan.transform.position = transform.position + new Vector3(0, Random.Range(-height + additionalHeight, height), 0);
         Destroy(newTrashCan, destroyTimer);
     }
     private void MakeItHarder()
     {
-        if (Score.score >= 0)
-        {
-            maxTime = 2f;
-        }
-        else if(Score.score > 25)
-        {
-            maxTime = 1.8f;
-        }
-        else if (Score.score > 50)
-        {
-            maxTime = 1.6f;
-        }
-        else if (Score.score > 75)
-        {
-            maxTime = 1.4f;
-        }
-        else if (Score.score > 100)
-        {
-            maxTime = 1.1f;
-        }
+        
     }
 }
