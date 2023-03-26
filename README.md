@@ -19,5 +19,5 @@
 
 ### Команда разработки
   - Ведущий разработчик: [Мишачев Алексей](https://vk.com/klimpit)
-  - Графический дизайнер: [Ильичев Александр](https://vk.com/alexander1337pocan)
+  - Графический дизайнер: [Ильичёв Александр](https://vk.com/alexander1337pocan)
   - Саундизайнер: [Савин Андрей](https://vk.com/pomorskiproduction)
