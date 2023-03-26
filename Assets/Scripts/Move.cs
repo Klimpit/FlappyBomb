@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    private float trashCanSpeed;
-
-    private void Awake()
-    {
-        trashCanSpeed = 4f;
-    }
+    public static float tubeSpeed = 4.3f;
 
     private void FixedUpdate()
     {
-        transform.position += Time.deltaTime * trashCanSpeed * Vector3.left;
-        MakeItHarder();
+        transform.position += Time.deltaTime * tubeSpeed * Vector3.left;
     }
-    private void MakeItHarder()
+
+    public static void ChangeSpeed(ref float speed)
     {
-        
+        speed += 0.01f;
     }
 }

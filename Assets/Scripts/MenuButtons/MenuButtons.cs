@@ -8,19 +8,25 @@ using UnityEngine.UI;
 
 public abstract class MenuButtons : MonoBehaviour
 {
+    public AudioSource sound;
+    public float timer = 0f;
     public void PlayPressed()
     {
-        SceneManager.LoadScene("Game");
+        Time.timeScale = 1f;
+        sound.Play();
+        Invoke(nameof(LoadScene), 0.185f);
     }   
     public void ExitPressed()
     {
-        Application.Quit();
+        sound.Play();
+        Invoke(nameof(Exit), 0.185f);
         Debug.Log("exit");
     }
     public void MenuPressed()
     {
+        sound.Play();
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Menu");
+        Invoke(nameof(LoadMenu), 0.15f);
     }
     public virtual void PressedByKey(string nameOfMethod, bool key, bool additionalCondition)
     {
@@ -28,5 +34,21 @@ public abstract class MenuButtons : MonoBehaviour
         {
             Invoke(nameOfMethod, 0.001f);
         }
+    }
+
+    private void LoadScene()
+    {
+        SceneManager.LoadScene("Game");
+        Debug.Log("play");
+    }
+
+    private void Exit()
+    {
+        Application.Quit();
+    }
+
+    private void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

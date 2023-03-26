@@ -10,14 +10,15 @@ public class PauseMenuButtons : MenuButtons
     [SerializeField] private Canvas pausePanel;
     private void Update()
     {
-        PressedByKey(nameof(PausePressed), Input.GetKeyUp(KeyCode.Escape), pausePanel.isActiveAndEnabled == false);
-        PressedByKey(nameof(ResumePressed), Input.GetKeyUp(KeyCode.Escape), pausePanel.isActiveAndEnabled);
-        PressedByKey(nameof(PlayPressed), Input.GetKeyUp(KeyCode.Space), Crash.isHadCrashed);
+        PressedByKey(nameof(PausePressed), Input.GetKeyDown(KeyCode.Escape), pausePanel.isActiveAndEnabled == false);
+        PressedByKey(nameof(ResumePressed), Input.GetKeyDown(KeyCode.Escape), pausePanel.isActiveAndEnabled);
+        PressedByKey(nameof(PlayPressed), Input.GetKeyDown(KeyCode.Space), Crash.isHadCrashed);
     }
     public void ResumePressed()
     {
         if(Crash.isHadCrashed ==false)
         {
+            sound.Play();
             Time.timeScale = 1f;
             pauseButton.gameObject.SetActive(true);
             pausePanel.gameObject.SetActive(false);

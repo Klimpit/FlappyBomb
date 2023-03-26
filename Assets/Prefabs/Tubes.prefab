@@ -170,11 +170,11 @@ AudioSource:
   m_GameObject: {fileID: 2579038288426136001}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1f5478dc7c78d4447b8eef33867f77d0, type: 3}
+  OutputAudioMixerGroup: {fileID: 7384904613893488328, guid: e6c0cb38afdd2c040952ccacf74b0bc2, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 3cb7d857f1de4e74998ae69fefe58e85, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.399
+  m_Pitch: 0.93
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -247,7 +247,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 1.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

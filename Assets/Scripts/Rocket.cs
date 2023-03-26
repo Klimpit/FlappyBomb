@@ -26,6 +26,10 @@ public class Rocket : MonoBehaviour
         Fly(Input.GetMouseButtonDown(0));
         rbd.velocity = Vector3.ClampMagnitude(rbd.velocity, maxVelocity);
         RocketRotation();
+        if(Crash.isHadCrashed)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     public void Fly(bool key)
