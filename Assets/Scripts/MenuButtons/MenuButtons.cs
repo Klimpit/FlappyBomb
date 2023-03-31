@@ -19,6 +19,7 @@ public abstract class MenuButtons : MonoBehaviour
     public void ExitPressed()
     {
         sound.Play();
+        Time.timeScale = 1f;
         Invoke(nameof(Exit), 0.185f);
         Debug.Log("exit");
     }
