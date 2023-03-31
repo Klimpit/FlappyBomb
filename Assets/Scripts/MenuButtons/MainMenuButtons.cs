@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuButtons : MenuButtons
 {
     [SerializeField] private Canvas settings;
     [SerializeField] private Canvas mainMenu;
+
     public void SettingPressed()
     {
         settings.gameObject.SetActive(true);

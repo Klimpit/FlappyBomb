@@ -5,8 +5,8 @@ using UnityEngine.Audio;
 
 public class VolumeInit : MonoBehaviour
 {
-    [SerializeField] string volumeParameter = "Master";
-    [SerializeField] AudioMixer mixer;
+    [SerializeField] private string volumeParameter = "Master";
+    [SerializeField] private AudioMixer mixer;
     void Start()
     {
         var volumeValue = PlayerPrefs.GetFloat(volumeParameter, 0f);
