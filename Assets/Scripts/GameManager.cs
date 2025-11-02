@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public bool IsGamePaused { get; private set; }
+    public bool IsGameStarted { get; private set; }
+
+    //public uint Score {  get; private set; }
+
     [SerializeField] private Canvas CrashMenu;
     [SerializeField] private TextMeshProUGUI score;
     [SerializeField] private TextMeshProUGUI maxScore;
@@ -18,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        //Score = 0;
+        IsGamePaused = false;
         mainTheme = GetComponent<AudioSource>();
         Time.timeScale = 1f;
         spawner.SetActive(false);
@@ -30,6 +34,10 @@ public class GameManager : MonoBehaviour
         FirstClick(Input.GetKeyDown(KeyCode.Space));
         FirstClick(Input.GetMouseButtonDown(0));
         HadCrashed();
+    }
+    public void StopResumeGame()
+    {
+        IsGamePaused = !IsGamePaused;
     }
     private void FirstClick(bool key)
     {

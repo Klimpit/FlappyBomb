@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ToggleInit : MonoBehaviour
 {
@@ -7,5 +6,4 @@ public class ToggleInit : MonoBehaviour
     {
         Screen.fullScreen = System.Convert.ToBoolean(PlayerPrefs.GetInt("FullScreen", 1));
     }
-
 }

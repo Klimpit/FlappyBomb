@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -12,5 +10,4 @@ public class VolumeInit : MonoBehaviour
         var volumeValue = PlayerPrefs.GetFloat(volumeParameter, 0f);
         mixer.SetFloat(volumeParameter, volumeValue);
     }
-
 }

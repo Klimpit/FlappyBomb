@@ -13,7 +13,7 @@ public class Crash : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameManager.mainTheme.Pause();
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         isHadCrashed = true;
         Debug.Log("GG!");
     }

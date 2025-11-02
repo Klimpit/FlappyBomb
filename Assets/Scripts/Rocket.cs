@@ -4,19 +4,19 @@ using UnityEngine.UIElements;
 
 public class Rocket : MonoBehaviour
 {
-    public Rigidbody2D rbd;
-    [SerializeField]
-    private float jumpForce = 8;
-    [SerializeField]
-    private float maxVelocity = 8;
-    [SerializeField]
-    private float gravityScale = 2f;
-    [SerializeField]
-    private Transform rocket;
+    private Rigidbody2D rbd;
+
+    [SerializeField] private float jumpForce = 8;
+    [SerializeField] private float maxVelocity = 8;
+    [SerializeField] private float gravityScale = 2f;
+
+    [SerializeField] private Transform rocket;
+
     private float speedRotation;
 
     private void Awake()
     {
+        rbd = GetComponent<Rigidbody2D>();
         rbd.gravityScale = 0;
     }
 

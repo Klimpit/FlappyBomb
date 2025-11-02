@@ -6,7 +6,7 @@ public class Move : MonoBehaviour
 {
     public static float tubeSpeed = 4.3f;
 
-    private void FixedUpdate()
+    private void Update()
     {
         transform.position += Time.deltaTime * tubeSpeed * Vector3.left;
     }
