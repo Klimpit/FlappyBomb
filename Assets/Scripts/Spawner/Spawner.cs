@@ -3,10 +3,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour, IObserver
 {
-    private static Spawner instance;
-
-    private float firstTimer = 3;
-    private float secondTimer = 0;
+    private float timer = 0;
     public static float maxTime;
     public GameObject tube;
     [SerializeField] private GameObject trigger;
@@ -19,17 +16,12 @@ public class Spawner : MonoBehaviour, IObserver
     {
         maxTime = 2f;
     }
-    void Start()
-    {
-        instance = this;
-    }
     
     private IEnumerator Spawn(GameObject newObject)
     {
         yield return new WaitForSeconds(1f);
         while (true)
         {
-            firstTimer = 0;
             GameObject copyOfNewObject = Instantiate(newObject);
             copyOfNewObject.transform.position = transform.position + new Vector3(0, Random.Range(-height + additionalHeight, height), 0);
             Destroy(copyOfNewObject, destroyTimer);
@@ -41,14 +33,14 @@ public class Spawner : MonoBehaviour, IObserver
     {
         if(additionalCondition % secondAdditionalCondition == 0 && additionalCondition != 0)
         {
-            if (secondTimer > 1)
+            if (timer > 1)
             {
-                secondTimer = 0;
+                timer = 0;
                 GameObject copyOfNewObject = Instantiate(newObject);
                 copyOfNewObject.transform.position = transform.position + new Vector3(0, Random.Range(-height + additionalHeight, height), 0);
                 Destroy(copyOfNewObject, destroyTimer);
             }
-            secondTimer += Time.deltaTime;
+            timer += Time.deltaTime;
         }
     }
     public static void ChangeTimer(ref float timer)

@@ -4,8 +4,6 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class Rocket : MonoBehaviour, IObserver
 {
-    private static Rocket instance;
-    
     private Rigidbody2D rbd;
 
     public static bool IsCrashed {  get; private set; }
@@ -18,7 +16,6 @@ public class Rocket : MonoBehaviour, IObserver
 
     private void Awake()
     {
-        instance = this;
         rbd = GetComponent<Rigidbody2D>();
         rbd.gravityScale = 0;
         IsCrashed = false;
@@ -70,13 +67,5 @@ public class Rocket : MonoBehaviour, IObserver
     public void UpdateOnEndGame()
     {
         Destroy(this);
-    }
-    public static Rocket GetInstance()
-    {
-        if (instance == null)
-        {
-            instance = new Rocket();
-        }
-        return instance;
     }
 }
