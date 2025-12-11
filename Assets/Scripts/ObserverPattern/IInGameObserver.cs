@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IObserver
+public interface IInGameObserver
 {
     void UpdateOnStartGame();
     void UpdateOnEndGame();

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
-public class Rocket : MonoBehaviour, IObserver
+public class Rocket : MonoBehaviour, IInGameObserver
 {
     private Rigidbody2D rbd;
 

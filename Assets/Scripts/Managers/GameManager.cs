@@ -1,25 +1,20 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
 public class GameManager : MonoBehaviour, ISubject
 {
-    private List<IObserver> Observers;
+    private List<IInGameObserver> InGameObservers;
+    private Score score;
     public static bool IsGamePaused { get; private set; }
     public static bool IsGameStarted { get; private set; }
-    //убрать
-    public static AudioSource mainTheme;
 
     private void Awake()
     {
-        Observers = new();
+        score = Score.GetInstance();
+        InGameObservers = new();
         IsGamePaused = false;
         IsGameStarted = false;
-        
-        mainTheme = GetComponent<AudioSource>();
-        mainTheme.Play();
     }
     private void Start()
     {
@@ -50,18 +45,18 @@ public class GameManager : MonoBehaviour, ISubject
             IsGameStarted = true;
         }
     }
-    public void AddObserver(IObserver observer) => Observers.Add(observer);
-    public void RemoveObserver(IObserver observer) => Observers.Remove(observer);
+    public void AddObserver(IInGameObserver observer) => InGameObservers.Add(observer);
+    public void RemoveObserver(IInGameObserver observer) => InGameObservers.Remove(observer);
     private void NotifyAboutEnd()
     {
-        foreach (var observer in Observers)
+        foreach (var observer in InGameObservers)
         {
             observer.UpdateOnEndGame();
         }
     }
     private void NotifyAboutStart()
     {
-        foreach (var observer in Observers)
+        foreach (var observer in InGameObservers)
         {
             observer.UpdateOnStartGame();
         }

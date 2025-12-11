@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour, IObserver
+public class Spawner : MonoBehaviour, IInGameObserver
 {
     private float timer = 0;
     public static float maxTime;
