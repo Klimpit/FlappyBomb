@@ -1,61 +1,69 @@
-using TMPro;
+using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using static UnityEngine.InputSystem.InputAction;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, ISubject
 {
-    public bool IsGamePaused { get; private set; }
-    public bool IsGameStarted { get; private set; }
-
-    //public uint Score {  get; private set; }
-
-    [SerializeField] private Canvas CrashMenu;
-    [SerializeField] private TextMeshProUGUI score;
-    [SerializeField] private TextMeshProUGUI maxScore;
-    [SerializeField] private Button pauseButton;
+    private List<IObserver> Observers;
+    public static bool IsGamePaused { get; private set; }
+    public static bool IsGameStarted { get; private set; }
+    //убрать
     public static AudioSource mainTheme;
-    public GameObject spawner;
-
-    public static bool firstClick = true;
 
     private void Awake()
     {
-        //Score = 0;
+        Observers = new();
         IsGamePaused = false;
+        IsGameStarted = false;
+        
         mainTheme = GetComponent<AudioSource>();
-        Time.timeScale = 1f;
-        spawner.SetActive(false);
-        firstClick = true;
         mainTheme.Play();
-        Application.targetFrameRate = 144;
     }
-    private void Update()
+    private void Start()
     {
-        FirstClick(Input.GetKeyDown(KeyCode.Space));
-        FirstClick(Input.GetMouseButtonDown(0));
-        HadCrashed();
+        AddObserver(FindAnyObjectByType<Rocket>().GetComponent<Rocket>());
+        AddObserver(FindAnyObjectByType<Spawner>().GetComponent<Spawner>());
+        AddObserver(FindAnyObjectByType<CrashMenu>().GetComponent<CrashMenu>());
+    }
+    private void FixedUpdate()
+    {
+        if (Rocket.IsCrashed)
+        {
+            NotifyAboutEnd();
+        }
     }
     public void StopResumeGame()
     {
         IsGamePaused = !IsGamePaused;
     }
-    private void FirstClick(bool key)
+    public void StopResumeGame(CallbackContext context)
     {
-        if (firstClick && key && Time.timeScale != 0f)
+        StopResumeGame();
+    }
+    public void StartTheGame(CallbackContext context)
+    {
+        if (!IsGameStarted)
         {
-            spawner.SetActive(true);
-            firstClick = false;
+            NotifyAboutStart();
+            IsGameStarted = true;
         }
     }
-
-    private void HadCrashed()
+    public void AddObserver(IObserver observer) => Observers.Add(observer);
+    public void RemoveObserver(IObserver observer) => Observers.Remove(observer);
+    private void NotifyAboutEnd()
     {
-        if (Crash.isHadCrashed)
+        foreach (var observer in Observers)
         {
-            CrashMenu.gameObject.SetActive(true);
-            score.text = Score.score.ToString();
-            maxScore.text = Score.maxScore.ToString();
-            pauseButton.gameObject.SetActive(false);
+            observer.UpdateOnEndGame();
+        }
+    }
+    private void NotifyAboutStart()
+    {
+        foreach (var observer in Observers)
+        {
+            observer.UpdateOnStartGame();
         }
     }
 }

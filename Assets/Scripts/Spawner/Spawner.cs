@@ -1,9 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour, IObserver
 {
+    private static Spawner instance;
+
     private float firstTimer = 3;
     private float secondTimer = 0;
     public static float maxTime;
@@ -11,7 +12,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject trigger;
     [SerializeField] private float height;
     [SerializeField] private float destroyTimer;
-    [SerializeField] private float additionalHeight = 0;
+    [SerializeField] private float additionalHeight;
     [SerializeField] private int scoreMetter;
 
     private void Awake()
@@ -20,26 +21,21 @@ public class Spawner : MonoBehaviour
     }
     void Start()
     {
-        Spawn(tube);
+        instance = this;
     }
-
-    // Update is called once per frame
-    void FixedUpdate()
+    
+    private IEnumerator Spawn(GameObject newObject)
     {
-        Spawn(tube);
-        Spawn(trigger, Score.score, 25);
-    }
-
-    private void Spawn(GameObject newObject)
-    {
-        if (firstTimer > maxTime)
+        yield return new WaitForSeconds(1f);
+        while (true)
         {
             firstTimer = 0;
             GameObject copyOfNewObject = Instantiate(newObject);
             copyOfNewObject.transform.position = transform.position + new Vector3(0, Random.Range(-height + additionalHeight, height), 0);
             Destroy(copyOfNewObject, destroyTimer);
+
+            yield return new WaitForSeconds(maxTime);
         }
-        firstTimer += Time.deltaTime;
     }
     private void Spawn(GameObject newObject, float additionalCondition, int secondAdditionalCondition)
     {
@@ -58,5 +54,13 @@ public class Spawner : MonoBehaviour
     public static void ChangeTimer(ref float timer)
     {
         timer -= 0.10f;
+    }
+    public void UpdateOnStartGame()
+    {
+        StartCoroutine(Spawn(tube));
+    }
+    public void UpdateOnEndGame()
+    {
+        Destroy(this);
     }
 }
